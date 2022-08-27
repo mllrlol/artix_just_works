@@ -11,11 +11,11 @@ mkfs.fat -F 32 "${DEV}1"
 mkfs.ext4 -L ROOT "${DEV}2"
 mkfs.ext4 -L HOME "${DEV}3"
 
-mount "${DEV}2" /mnt
+mount "/dev/${DEV}2" /mnt
 mkdir /mnt/boot
 mkdir /mnt/home
-mount "${DEV}1" /mnt/boot
-mount "${DEV}3" /mnt/home
+mount "/dev/${DEV}1" /mnt/boot
+mount "/dev/${DEV}3" /mnt/home
 
 basestrap /mnt base base-devel runit elogind-runit
 basestrap /mnt linux linux-firmware

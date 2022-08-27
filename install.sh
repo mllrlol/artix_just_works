@@ -7,9 +7,9 @@ lsblk
 read -p 'Pleas enter a disk to be format ("/dev/" \033[0;31mNOT\033[0m included): ' DEV
 fdisk "/dev/${DEV}"
 
-mkfs.fat -F 32 "${DEV}1"
-mkfs.ext4 -L ROOT "${DEV}2"
-mkfs.ext4 -L HOME "${DEV}3"
+mkfs.fat -F 32 "/dev/${DEV}1"
+mkfs.ext4 -L ROOT "/dev/${DEV}2"
+mkfs.ext4 -L HOME "/dev/${DEV}3"
 
 mount "/dev/${DEV}2" /mnt
 mkdir /mnt/boot

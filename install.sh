@@ -18,6 +18,6 @@ mount "${DEV}1" /mnt/boot
 mount "${DEV}3" /mnt/home
 
 basestrap /mnt base base-devel runit eloging-runit linux linux-base
-fstabgen -U /mnt >> /mnt/etv/fstab
+fstabgen -U /mnt >> /mnt/etc/fstab
 
 artix-chroot /mnt

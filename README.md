@@ -17,7 +17,7 @@ passwd user
 ```
 
 ## Localization
-Install a text editor of your choice (my recomedations are: vi, vim, neovim) and edit ```/etc/local.gen'''
+Install a text editor of your choice (my recomedations are: vi, vim, neovim) and edit ```/etc/local.gen```
 
 ```
 pacman -S neovim

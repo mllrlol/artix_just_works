@@ -4,7 +4,7 @@ pacman -Sy neovim util-linux
 
 echo -e "\n\nYou will need 3 partitions:\n\033[1;34mef00 on sdx1\n\033[1;35mROOT on sdx2\n\033[0;37mHOME on sdx3\033[0m"
 lsblk
-read -p 'Pleas enter a disk to be format ("/dev/" \033[0;31mNOT\033[0m included): ' DEV
+read -p $'Pleas enter a disk to be format ("/dev/" \e[31mNOT\e[0m included): ' DEV
 fdisk "/dev/${DEV}"
 
 mkfs.fat -F 32 "/dev/${DEV}1"
@@ -21,28 +21,12 @@ basestrap /mnt base base-devel runit elogind-runit
 basestrap /mnt linux linux-firmware
 fstabgen -U /mnt >> /mnt/etc/fstab
 
-artix-chroot /mnt
-
 read -p 'Pleas enter a Region/City: ' ZONEINFO
-ln -sf "/usr/share/zoneinfo/${ZONEINFO}" /etc/localtime
-
-hwclock --systohc
-
-pacman -S neovim
-nvim /etc/local.gen
-local-gen
-
-pacman -S grub os-prober efibootmgr
-grub-install --recheck /dev/sda
-grub-install --target=x86_64 --efi-directory=/boot --bootloader-id=grub
-
-passwd
+ln -sf "/mnt/usr/share/zoneinfo/${ZONEINFO}" /etc/localtime
 
 read -p 'Enter a hostname: ' HOSTNAME
 echo $HOSTNAME > /etc/hostname
-echo "127.0.0.1	localhost\n::1	localhost\n127.0.1.1	${HOSTNAME}.localdomain	${HOSTNAME}"
+echo "127.0.0.1	localhost\n::1	localhost\n127.0.1.1	${HOSTNAME}.localdomain	${HOSTNAME}" > /mnt/etc/hosts
 
-pacman -S connman-runit connman-gtk elogind
-ln -s /etc/runit/sv/connmand /etc/runit/runsvdir/default
-
-echo "System install finished"
+echo "Sytem install finished, chroot into install"
+artix-chroot /mnt

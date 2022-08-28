@@ -24,13 +24,13 @@ pacman -S neovim
 nvim /etc/local.gen
 ```
 
-Generate your locales
+Generate your locales:
 ```
 locale-gen
 ```
 
 ## Boot Loader
-Install grub
+Install grub:
 ```
 pacman -S grub os-prober efibootmgr
  grub-install --recheck /dev/sda                                               # for BIOS systems

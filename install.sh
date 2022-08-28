@@ -22,10 +22,10 @@ basestrap /mnt linux linux-firmware
 fstabgen -U /mnt >> /mnt/etc/fstab
 
 read -p 'Pleas enter a Region/City: ' ZONEINFO
-ln -sf "/mnt/usr/share/zoneinfo/${ZONEINFO}" /etc/localtime
+ln -sf "/mnt/usr/share/zoneinfo/${ZONEINFO}" /mnt/etc/localtime
 
 read -p 'Enter a hostname: ' HOSTNAME
-echo $HOSTNAME > /etc/hostname
+echo $HOSTNAME > mnt/etc/hostname
 echo "127.0.0.1	localhost\n::1	localhost\n127.0.1.1	${HOSTNAME}.localdomain	${HOSTNAME}" > /mnt/etc/hosts
 
 echo "Sytem install finished, chroot into install"

@@ -2,9 +2,30 @@
 
 *A command line artix linux install helper*
 
-This tool only gives you a *very* bare-bones, Runit install of artix linux based on the [wiki](https://wiki.artixlinux.org/Main/Installation). You might want to proceed with things like these:
+This tool only gives you a *very* bare-bones, Runit install of artix linux based on the [wiki](https://wiki.artixlinux.org/Main/Installation).
 
-## Add user
+## Getting started
+Switch to root (if you don't want use ```sudo```):
+```
+su
+```
+
+Download git and clone the repo:
+```
+pacman -Sy git
+git clone https://github.com/mllrlol/artix_just_works
+```
+
+Mark ```install.sh``` as exetutable and run it:
+```
+cd artix_just_works
+chmod +x install.sh
+./install.sh
+```
+## After running the script
+Because this is truely a bare-bones install you might want to proceed with things like this:
+
+### Adding users
 Set the password of root:
 ```
 passwd
@@ -16,7 +37,7 @@ useradd -m user
 passwd user
 ```
 
-## Localization
+### Localization
 Install a text editor of your choice (my recomedations are: vi, vim, neovim) and edit ```/etc/local.gen```
 
 ```
@@ -29,7 +50,7 @@ Generate your locales:
 locale-gen
 ```
 
-## Boot Loader
+### Boot Loader
 Install grub:
 ```
 pacman -S grub os-prober efibootmgr
